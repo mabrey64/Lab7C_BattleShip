@@ -3,6 +3,12 @@ public class Ship
     private int size;
     private int hits;
 
+    public Ship (String name, int size)
+    {
+        this.size = size;
+        this.hits = 0;
+    }
+
     public int GetSize()
     {
         return size;

@@ -35,9 +35,13 @@ public class Board
 //            }
 //        }
 //    }
-//
-//    public void PlaceMark (int row, int col)
-//    {
-//        grid[row][col].SetMark();
-//    }
+
+    public void PlaceMark (int row, int col, String mark, StatusDisplay statusDisplay)
+    {
+       String currentState = grid[row][col].GetMark();
+       if(!currentState.equals(mark))
+       {
+           grid[row][col].SetMark(mark, statusDisplay);
+       }
+    }
 }
