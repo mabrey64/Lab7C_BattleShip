@@ -7,27 +7,33 @@ public class Game
     public List[][] positions;
 
 
-    public StartGame() {
-        // Code to start the game
+    public void StartGame()
+    {
+        RandomizeShips();
     }
 
-    public RandomizeShips() {
+    public void RandomizeShips()
+    {
         // Code to randomize the ships
     }
 
-    public HandleMove(int row, int col) {
+    public void HandleMove(int row, int col)
+    {
         // Code to handle the move
     }
 
-    public DetermineGameState() {
+    public void DetermineGameState()
+    {
         // Code to determine the game state
     }
 
-    public DisplayWin() {
+    public void DisplayWin()
+    {
         // Code to display the win
     }
 
-    public DisplayLoss() {
+    public void DisplayLoss()
+    {
         // Code to display the loss
     }
 

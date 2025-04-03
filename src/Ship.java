@@ -3,28 +3,31 @@ public class Ship
     private int size;
     private int hits;
 
-    public GetSize()
+    public int GetSize()
     {
         return size;
     }
 
-    public SetSize()
+    public void SetSize(int size)
     {
-
+        this.size = size;
     }
 
-    public IsHit()
+    public boolean IsHit()
     {
-
+        return hits > 0;
     }
 
-    public IsSunk()
+    public boolean IsSunk()
     {
-
+        return hits >= size;
     }
 
-    public RegisterHit()
+    public void RegisterHit()
     {
-
+        if (hits < size)
+        {
+            hits++;
+        }
     }
 }

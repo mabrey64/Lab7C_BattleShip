@@ -1,31 +1,32 @@
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class ControlButton
+public class ControlButton extends JButton
 {
     private String Label;
 
     public ControlButton(String label)
     {
-        Label = label;
+        super(label);
     }
 
-    void NewGame()
+    static ActionListener NewGame()
     {
-        ActionListener listener = e ->
+        return e ->
         {
             String[] options = {"New Game", "Continue"};
             JOptionPane.showOptionDialog(null, "Would you like to start a new game or continue the current game?", "New Game", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             if (JOptionPane.YES_OPTION == 0)
             {
                 // Code to start a new game
+                System.out.println("Error expected, action listener worked.");
             }
         };
     }
 
-    void QuitGame()
+    static ActionListener QuitGame()
     {
-        ActionListener listener = e ->
+        return e ->
         {
             JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?", "Quit Game", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == 0)
