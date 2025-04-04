@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class Board
 {
-    private GridButton[][] grid;
+    GridButton[][] grid;
     private Game game;
     private JPanel boardPanel;
 

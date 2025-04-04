@@ -24,6 +24,16 @@ public class StatusDisplay extends JPanel
         updateStatus();
     }
 
+    @Override
+    public String toString() {
+        return "StatusDisplay{" +
+                "MissCounter=" + MissCounter +
+                ", StrikeCounter=" + StrikeCounter +
+                ", TotalMissCounter=" + TotalMissCounter +
+                ", TotalHitCounter=" + TotalHitCounter +
+                '}';
+    }
+
     public void IncrementCounter(String result)
     {
         if (result.equals("Miss"))
