@@ -10,15 +10,22 @@ public class GameFrame extends JFrame
     public ControlButton quitButton;
     public String Title;
     public Board board;
+    public JLabel titleLabel;
 
     public GameFrame()
     {
+        // Initialize the components
+
         mainGame = new JPanel(new GridBagLayout());
         status = new StatusDisplay(3, 2, 5, 4);
         game = new Game();
         playButton = new ControlButton("Play");
         quitButton = new ControlButton("Quit");
         Title = "Battleship";
+        titleLabel = new JLabel("Single-Player Battleship: Defeat the AI");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
         setTitle(Title);
         setSize(800, 800);
         DisplayFrame();
@@ -44,6 +51,7 @@ public class GameFrame extends JFrame
         mainGame.add(boardPanel, c);
 
         add(mainGame, BorderLayout.CENTER);
+        add(titleLabel, BorderLayout.NORTH);
 
         DisplayStatus();
         DisplayButtons();
