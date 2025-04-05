@@ -13,7 +13,6 @@ public class GridButton extends JButton
     {
         this.row = row;
         this.col = col;
-        statusDisplay = new StatusDisplay(0, 0, 0, 0);
         setPreferredSize(new Dimension(30, 30));
         this.state = "";
         setForeground(Color.BLACK);

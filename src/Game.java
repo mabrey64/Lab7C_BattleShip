@@ -4,20 +4,22 @@ import java.util.List;
 
 public class Game
 {
+    private GameFrame gameFrame;
     public Board board;
     public Ship[][] ships;
     public Ship[][] positions;
     public StatusDisplay statusDisplay;
     private boolean[][] clicked;
 
-    public Game ()
+    public Game (GameFrame gameFrame)
     {
+        this.gameFrame = gameFrame;
         // Initialize the game
         positions = new Ship[10][10];
         ships = new Ship[10][10];
         clicked = new boolean[10][10];
         board = new Board(this);
-        statusDisplay = new StatusDisplay(0, 0, 0, 0);
+        statusDisplay = gameFrame.status;
         StartGame();
     }
 
@@ -197,10 +199,10 @@ public class Game
         // Code to handle the move
         if (positions[row][col] != null) {
             // Hit
-            ships[row][col].RegisterHit();
+            positions[row][col].RegisterHit();
             System.out.println("Hit at (" + row + ", " + col + ")");
-            statusDisplay.IncrementCounter("Hit");
-            if (ships[row][col].IsSunk()) {
+            gameFrame.IncrementCounter("Hit");
+            if (positions[row][col].IsSunk()) {
                 System.out.println("Ship sunk!");
                 if (CheckAllShipsSunk()) {
                     DisplayWin();

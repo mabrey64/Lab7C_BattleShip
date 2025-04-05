@@ -2,10 +2,10 @@ public class Main
 {
     public static void main(String[] args) {
         // Create the game frame
-        new GameFrame();
+        GameFrame gameFrame = new GameFrame();
 
         // Initialize the game
-        Game game = new Game();
+        Game game = new Game(gameFrame);
         game.StartGame();
         printShipPositions(game);
     }

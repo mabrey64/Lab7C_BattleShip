@@ -15,7 +15,6 @@ public class GameFrame extends JFrame {
         // Initialize the components
         mainGame = new JPanel(new GridBagLayout());
         status = new StatusDisplay(0, 0, 0, 0);
-        game = new Game();
         playButton = new ControlButton("Play");
         quitButton = new ControlButton("Quit");
         Title = "Battleship";
@@ -25,6 +24,10 @@ public class GameFrame extends JFrame {
 
         setTitle(Title);
         setSize(800, 800);
+
+        game = new Game(this);
+        board = new Board(game);
+
         DisplayFrame();
     }
 
@@ -86,5 +89,9 @@ public class GameFrame extends JFrame {
         mainGame.add(status, c);
         mainGame.revalidate();
         mainGame.repaint();
+    }
+
+    public void IncrementCounter(String result) {
+        status.IncrementCounter(result);
     }
 }
