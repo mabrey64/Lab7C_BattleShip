@@ -14,7 +14,7 @@ public class GameFrame extends JFrame {
     public GameFrame() {
         // Initialize the components
         mainGame = new JPanel(new GridBagLayout());
-        status = new StatusDisplay(3, 2, 5, 4);
+        status = new StatusDisplay(0, 0, 0, 0);
         game = new Game();
         playButton = new ControlButton("Play");
         quitButton = new ControlButton("Quit");

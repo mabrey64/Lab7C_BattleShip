@@ -6,7 +6,7 @@ public class StatusDisplay extends JPanel
 {
     private JLabel statusLabel;
     private int MissCounter;
-    private int StrikeCounter;
+    int StrikeCounter;
     private int TotalMissCounter;
     private int TotalHitCounter;
 
@@ -39,12 +39,20 @@ public class StatusDisplay extends JPanel
         if (result.equals("Miss"))
         {
             MissCounter++;
-            StrikeCounter++;
             TotalMissCounter++;
+            System.out.println("MissCounter: " + MissCounter);
+            System.out.println("TotalMissCounter: " + TotalMissCounter);
+            if (MissCounter >= 5)
+            {
+                StrikeCounter++;
+                MissCounter = 0;
+                System.out.println("StrikeCounter: " + StrikeCounter);
+            }
         }
         else if (result.equals("Hit"))
         {
             TotalHitCounter++;
+            System.out.println("TotalHitCounter: " + TotalHitCounter);
         }
 
     }

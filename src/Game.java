@@ -1,4 +1,5 @@
 
+import javax.swing.*;
 import java.util.List;
 
 public class Game
@@ -118,6 +119,25 @@ public class Game
 //        }
 //    }
 
+//    public void ResetGame() {
+//        int rows = 10;
+//        int cols = 10;
+//
+//        positions = new Ship[rows][cols];
+//        ships = new Ship[rows][cols];
+//        clicked = new boolean[rows][cols];
+//
+//        for (int i = 0; i < rows; i++) {
+//            for (int j = 0; j < cols; j++) {
+//                positions[i][j] = null;
+//                ships[i][j] = null;
+//                clicked[i][j] = false;
+//            }
+//        }
+//
+//        SetStaticShips();
+//    }
+
     public void SetStaticShips() {
         int rows = 10;
         int cols = 10;
@@ -179,6 +199,7 @@ public class Game
             // Hit
             ships[row][col].RegisterHit();
             System.out.println("Hit at (" + row + ", " + col + ")");
+            statusDisplay.IncrementCounter("Hit");
             if (ships[row][col].IsSunk()) {
                 System.out.println("Ship sunk!");
                 if (CheckAllShipsSunk()) {
@@ -188,6 +209,10 @@ public class Game
         } else {
             // Miss
             System.out.println("Miss at (" + row + ", " + col + ")");
+            statusDisplay.IncrementCounter("Miss");
+            if (statusDisplay.StrikeCounter >= 3) {
+                DisplayLoss();
+            }
         }
     }
 
@@ -210,12 +235,31 @@ public class Game
     public void DisplayWin()
     {
         // Code to display the win
+        int response = JOptionPane.showConfirmDialog(null, "You win! Play again?", "Game Over", JOptionPane.YES_NO_OPTION);
+        if (response == JOptionPane.YES_OPTION) {
+            // Reset the game
+            // ResetGame();
+            System.exit(0);
+        } else {
+            // Exit the game
+            System.exit(0);
+        }
         System.out.println("All ships sunk! You win!");
     }
 
     public void DisplayLoss()
     {
         // Code to display the loss
+        int response = JOptionPane.showConfirmDialog(null, "3 Strikes! You Lose...", "Game Over", JOptionPane.YES_NO_OPTION);
+        if (response == JOptionPane.YES_OPTION) {
+            // Reset the game
+            // ResetGame();
+            System.exit(0);
+        } else {
+            // Exit the game
+            System.exit(0);
+        }
+        System.out.println("You lose!");
     }
 
 
