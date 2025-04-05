@@ -181,11 +181,25 @@ public class Game
             System.out.println("Hit at (" + row + ", " + col + ")");
             if (ships[row][col].IsSunk()) {
                 System.out.println("Ship sunk!");
+                if (CheckAllShipsSunk()) {
+                    DisplayWin();
+                }
             }
         } else {
             // Miss
             System.out.println("Miss at (" + row + ", " + col + ")");
         }
+    }
+
+    public boolean CheckAllShipsSunk() {
+        for (int i = 0; i < ships.length; i++) {
+            for (int j = 0; j < ships[i].length; j++) {
+                if (ships[i][j] != null && !ships[i][j].IsSunk()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public void DetermineGameState()
@@ -196,6 +210,7 @@ public class Game
     public void DisplayWin()
     {
         // Code to display the win
+        System.out.println("All ships sunk! You win!");
     }
 
     public void DisplayLoss()
