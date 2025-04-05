@@ -1,8 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class GameFrame extends JFrame
-{
+public class GameFrame extends JFrame {
     public JPanel mainGame;
     public StatusDisplay status;
     public Game game;
@@ -12,10 +11,8 @@ public class GameFrame extends JFrame
     public Board board;
     public JLabel titleLabel;
 
-    public GameFrame()
-    {
+    public GameFrame() {
         // Initialize the components
-
         mainGame = new JPanel(new GridBagLayout());
         status = new StatusDisplay(3, 2, 5, 4);
         game = new Game();
@@ -29,18 +26,12 @@ public class GameFrame extends JFrame
         setTitle(Title);
         setSize(800, 800);
         DisplayFrame();
-        //StartGame(); This should be called when the GameFrame is initialized
     }
 
-    public void DisplayFrame()
-    {
+    public void DisplayFrame() {
         setLayout(new BorderLayout());
 
-        JPanel boardPanel = new JPanel();
-        boardPanel.setPreferredSize(new Dimension(450, 450));
-        boardPanel.setLayout(new GridLayout(10, 10));
-
-        board = new Board(boardPanel);
+        board = new Board(game);
         board.DisplayBoard();
 
         GridBagConstraints c = new GridBagConstraints();
@@ -48,7 +39,7 @@ public class GameFrame extends JFrame
         c.gridy = 0;
         c.weightx = 1;
         c.weighty = .8;
-        mainGame.add(boardPanel, c);
+        mainGame.add(board.getBoardPanel(), c);
 
         add(mainGame, BorderLayout.CENTER);
         add(titleLabel, BorderLayout.NORTH);
@@ -59,12 +50,9 @@ public class GameFrame extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 800);
         setVisible(true);
-        // Code to display the frame
     }
 
-    public void DisplayButtons()
-    {
-        // Code to display the buttons. Can be placed below Grid using proper layout manager
+    public void DisplayButtons() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -88,8 +76,7 @@ public class GameFrame extends JFrame
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    public void DisplayStatus()
-    {
+    public void DisplayStatus() {
         status.setVisible(true);
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
@@ -99,6 +86,5 @@ public class GameFrame extends JFrame
         mainGame.add(status, c);
         mainGame.revalidate();
         mainGame.repaint();
-
     }
 }

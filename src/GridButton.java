@@ -6,12 +6,25 @@ public class GridButton extends JButton
     private int row;
     private int col;
     private String state;
+    StatusDisplay statusDisplay;
+    Game game;
 
     public GridButton()
     {
-        setPreferredSize(new Dimension(13, 13));
-        setMinimumSize(new Dimension(10, 10));
-        setMaximumSize(new Dimension(20, 20));
+        this.row = row;
+        this.col = col;
+        statusDisplay = new StatusDisplay(0, 0, 0, 0);
+        setPreferredSize(new Dimension(30, 30));
+        this.state = "";
+        setForeground(Color.BLACK);
+        setMargin(new Insets(0, 0, 0, 0));
+        setBackground(Color.LIGHT_GRAY); // Add this line for a light gray background
+        setOpaque(true); // Ensure the background is painted
+    }
+
+    public void SetGame(Game game)
+    {
+        this.game = game;
     }
 
     public String GetMark()
@@ -20,50 +33,19 @@ public class GridButton extends JButton
         return state != null ? state : "";
     }
 
-    public void SetMark(String currentState, StatusDisplay statusDisplay)
-    {
-        // Code to set the mark
-        this.state = currentState;
-        if(state.equals("Miss"))
-        {
-            // Code to set the mark to a miss
-            this.setText("X");
-            // Another way to set the mark to a miss
-            this.setIcon(resizeIcon(new ImageIcon(getClass().getResource("/images/miss.png")), 13, 13));
-            statusDisplay.IncrementCounter("Miss");
+    public void SetMark(String mark, StatusDisplay statusDisplay) {
+        this.state = mark;
+        System.out.println("SetMark called with mark: " + mark);
+        if (mark.equals("Miss")) {
+            setText("X");
+            System.out.println("setText(\"X\") called");
+        } else if (mark.equals("Hit")) {
+            setText("O");
+            System.out.println("setText(\"O\") called");
+        } else {
+            setText("");
+            System.out.println("setText(\"\") called");
         }
-        else if(state.equals("Hit"))
-        {
-            // Code to set the mark to a Hit
-            this.setText("O");
-            // Another way to set the mark to a Hit
-            this.setIcon(resizeIcon(new ImageIcon(getClass().getResource("/images/hit.png")), 13, 13));
-
-            // Increment the hit counter
-            statusDisplay.IncrementCounter("Hit");
-        }
-        System.out.println("statusDisplay: " + statusDisplay);
-    }
-
-    public void Click(Game game, int row, int col, StatusDisplay statusDisplay)
-    {
-        // Code to handle the click
-        if(game.positions[row][col] != null)
-        {
-            // Hit
-            game.HandleMove(row, col);
-            System.out.println("Hit at (" + row + ", " + col + ")");
-            if(game.positions[row][col].IsSunk())
-            {
-                System.out.println("Ship sunk!");
-            }
-        }
-        else
-        {
-            // Miss
-            System.out.println("Miss at (" + row + ", " + col + ")");
-        }
-        statusDisplay.updateStatus();
     }
 
     private static ImageIcon resizeIcon(ImageIcon icon, int width, int height) {

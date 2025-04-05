@@ -1,3 +1,4 @@
+
 import java.util.List;
 
 public class Game
@@ -5,7 +6,15 @@ public class Game
     public Board board;
     public Ship[] ships;
     public Ship[][] positions;
+    public StatusDisplay statusDisplay;
 
+    public Game ()
+    {
+        // Initialize the game
+        positions = new Ship[10][10];
+        board = new Board(this);
+        statusDisplay = new StatusDisplay(0, 0, 0, 0);
+    }
 
     public void StartGame()
     {
