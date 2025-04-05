@@ -265,6 +265,7 @@ public class Game
             gameFrame.IncrementCounter("Hit");
             gameFrame.board.getGrid()[row][col].SetMark("Hit", statusDisplay);
             if (positions[row][col].IsSunk()) {
+                JOptionPane.showMessageDialog(null, "You sunk a " + positions[row][col].GetName() + "!", "Ship Sunk", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println("Ship sunk!");
                 if (CheckAllShipsSunk()) {
                     DisplayWin();
