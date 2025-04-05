@@ -14,6 +14,7 @@ public class StatusDisplay extends JPanel
     private static int displayCounter = 0;
     private static int labelCounter = 0;
 
+    // Constructor for StatusDisplay
     public StatusDisplay(int initialMisses, int initialStrikes, int initialTotalMisses, int initialTotalHits)
     {
         displayId = "StatusDisplay-" + displayCounter++;
@@ -30,6 +31,7 @@ public class StatusDisplay extends JPanel
         System.out.println("Created " + displayId + " with " + labelId);
     }
 
+    // Constructor for StatusDisplay with default values
     @Override
     public String toString() {
         return "StatusDisplay{" +
@@ -42,6 +44,11 @@ public class StatusDisplay extends JPanel
                 '}';
     }
 
+    /*
+        * This method increments the miss and strike counters based on the result of the game.
+        * It updates the status label with the current game stats.
+        * It also resets the miss counter if it reaches 5.
+     */
     public void IncrementCounter(String result)
     {
 
@@ -68,6 +75,10 @@ public class StatusDisplay extends JPanel
     repaint();
 }
 
+    /*
+        * This method updates the status label with the current game stats.
+        * It also sets the background color of the label to red and then resets it.
+     */
     public void UpdateStatus()
     {
         System.out.println("Updating " + displayId + " with " + labelId);
@@ -81,5 +92,12 @@ public class StatusDisplay extends JPanel
         statusLabel.repaint();
         this.revalidate();
         this.repaint();
+    }
+
+    public void ResetCounters() {
+        MissCounter = 0;
+        StrikeCounter = 0;
+        TotalMissCounter = 0;
+        TotalHitCounter = 0;
     }
 }

@@ -5,25 +5,36 @@ public class ControlButton extends JButton
 {
     private String Label;
 
+    // Constructor for ControlButton
     public ControlButton(String label)
     {
         super(label);
     }
 
-    static ActionListener NewGame()
+    /*
+     * This method sets the label for the button.
+     * It also sets the action listener for the button.
+     */
+    static ActionListener NewGame(GameFrame gameFrame)
     {
         return e ->
         {
             String[] options = {"New Game", "Continue"};
-            JOptionPane.showOptionDialog(null, "Would you like to start a new game or continue the current game?", "New Game", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-            if (JOptionPane.YES_OPTION == 0)
+            int choice  = JOptionPane.showOptionDialog(null, "Would you like to start a new game or continue the current game?", "New Game", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if (choice == 0)
             {
                 // Code to start a new game
-                System.out.println("Error expected, action listener worked.");
+                System.out.println("Starting a new game...");
+                gameFrame.game.ResetGame();
+                gameFrame.board.DisplayBoard();
             }
         };
     }
 
+    /*
+     * This method sets the action listener for the quit button.
+     * It shows a confirmation dialog when the button is clicked.
+     */
     static ActionListener QuitGame()
     {
         return e ->

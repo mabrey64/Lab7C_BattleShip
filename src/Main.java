@@ -3,14 +3,10 @@ public class Main
     public static void main(String[] args) {
         // Create the game frame
         GameFrame gameFrame = new GameFrame();
-
-        // Initialize the game
-        Game game = new Game(gameFrame);
-        game.StartGame();
-        printShipPositions(game);
+        printShipPositions(gameFrame.game);
     }
 
-    // This method prints the ship positions on the console. Used for debugging purposes.
+    // This method prints the ship positions on the console. Used for debugging purposes. Will remain commented out.
     public static void printShipPositions(Game game) {
         Ship[][] positions = game.positions;
         for (int i = 0; i < positions.length; i++) {

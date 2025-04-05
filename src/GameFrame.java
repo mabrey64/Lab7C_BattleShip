@@ -12,7 +12,7 @@ public class GameFrame extends JFrame {
     public JLabel titleLabel;
 
     public GameFrame() {
-        // Initialize the components
+        // Constructor to initialize the game frame
         mainGame = new JPanel(new GridBagLayout());
         status = new StatusDisplay(0, 0, 0, 0);
         playButton = new ControlButton("Play");
@@ -25,16 +25,19 @@ public class GameFrame extends JFrame {
         setTitle(Title);
         setSize(800, 800);
 
-        game = new Game(this);
-        board = new Board(game);
-
+        board = new Board();
+        game = new Game(this, board);
         DisplayFrame();
     }
 
+    /*
+        * This method sets up the main game frame, including the title, board, and status display.
+        * It also adds the buttons for playing and quitting the game.
+     */
     public void DisplayFrame() {
         setLayout(new BorderLayout());
 
-        board = new Board(game);
+        board.SetGame(game);
         board.DisplayBoard();
 
         GridBagConstraints c = new GridBagConstraints();
@@ -50,11 +53,17 @@ public class GameFrame extends JFrame {
         DisplayStatus();
         DisplayButtons();
 
+        System.out.println("GameFrame.DisplayFrame - Board instance: " + board);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 800);
         setVisible(true);
     }
 
+    /*
+        * This method sets up the buttons for playing and quitting the game.
+        * It adds action listeners to the buttons to handle their respective actions.
+     */
     public void DisplayButtons() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridBagLayout());
@@ -66,7 +75,7 @@ public class GameFrame extends JFrame {
         playButton.setPreferredSize(new Dimension(100, 50));
         quitButton.setPreferredSize(new Dimension(100, 50));
 
-        playButton.addActionListener(ControlButton.NewGame());
+        playButton.addActionListener(ControlButton.NewGame(this));
         quitButton.addActionListener(ControlButton.QuitGame());
 
         c.gridx = 0;
@@ -79,6 +88,10 @@ public class GameFrame extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    /*
+        * This method displays the status of the game, including the current game stats.
+        * It adds the status display to the main game panel.
+     */
     public void DisplayStatus() {
         status.setVisible(true);
         GridBagConstraints c = new GridBagConstraints();
@@ -91,6 +104,10 @@ public class GameFrame extends JFrame {
         mainGame.repaint();
     }
 
+    /*
+        * This method handles the move made by the player.
+        * It updates the board and the status display based on the move.
+     */
     public void IncrementCounter(String result) {
         status.IncrementCounter(result);
     }
