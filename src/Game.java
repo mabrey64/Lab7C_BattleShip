@@ -140,57 +140,57 @@ public class Game
 //        SetStaticShips();
 //    }
 
-    public void SetStaticShips() {
-        int rows = 10;
-        int cols = 10;
-
-        Ship ship1 = new Ship("Carrier", 5);
-        Ship ship2 = new Ship("Battleship", 4);
-        Ship ship3 = new Ship("Cruiser", 3);
-        Ship ship4 = new Ship("Submarine", 3);
-        Ship ship5 = new Ship("Destroyer", 2);
-
-        positions = new Ship[rows][cols];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                positions[i][j] = null;
-                ships[i][j] = null;
-                clicked[i][j] = false;
-            }
-        }
-
-        // Set static positions for the ships
-        // Carrier
-        for (int i = 0; i < ship1.GetSize(); i++) {
-            positions[0][i] = ship1;
-            ships[0][i] = ship1;
-        }
-        // Battleship (vertical)
-        for (int i = 0; i < ship2.GetSize(); i++) {
-            positions[i][5] = ship2;
-            ships[i][5] = ship2;
-        }
-        // Cruiser
-        for (int i = 0; i < ship3.GetSize(); i++) {
-            positions[4][i + 3] = ship3;
-            ships[4][i + 3] = ship3;
-        }
-        // Submarine (vertical
-        for (int i = 0; i < ship4.GetSize(); i++) {
-            positions[i + 5][6] = ship4;
-            ships[i + 5][6] = ship4;
-        }
-        // Destroyer
-        for (int i = 0; i < ship5.GetSize(); i++) {
-            positions[8][i + 7] = ship5;
-            ships[8][i + 7] = ship5;
-        }
-    }
+//    public void SetStaticShips() {
+//        int rows = 10;
+//        int cols = 10;
+//
+//        Ship ship1 = new Ship("Carrier", 5);
+//        Ship ship2 = new Ship("Battleship", 4);
+//        Ship ship3 = new Ship("Cruiser", 3);
+//        Ship ship4 = new Ship("Submarine", 3);
+//        Ship ship5 = new Ship("Destroyer", 2);
+//
+//        positions = new Ship[rows][cols];
+//        for (int i = 0; i < rows; i++) {
+//            for (int j = 0; j < cols; j++) {
+//                positions[i][j] = null;
+//                ships[i][j] = null;
+//                clicked[i][j] = false;
+//            }
+//        }
+//
+//        // Set static positions for the ships
+//        // Carrier
+//        for (int i = 0; i < ship1.GetSize(); i++) {
+//            positions[0][i] = ship1;
+//            ships[0][i] = ship1;
+//        }
+//        // Battleship (vertical)
+//        for (int i = 0; i < ship2.GetSize(); i++) {
+//            positions[i][5] = ship2;
+//            ships[i][5] = ship2;
+//        }
+//        // Cruiser
+//        for (int i = 0; i < ship3.GetSize(); i++) {
+//            positions[4][i + 3] = ship3;
+//            ships[4][i + 3] = ship3;
+//        }
+//        // Submarine (vertical
+//        for (int i = 0; i < ship4.GetSize(); i++) {
+//            positions[i + 5][6] = ship4;
+//            ships[i + 5][6] = ship4;
+//        }
+//        // Destroyer
+//        for (int i = 0; i < ship5.GetSize(); i++) {
+//            positions[8][i + 7] = ship5;
+//            ships[8][i + 7] = ship5;
+//        }
+//    }
 
     public void HandleMove(int row, int col)
     {
         if (clicked[row][col]) {
-            System.out.println("Already clicked on this position.");
+            JOptionPane.showMessageDialog(null,"This button was already clicked!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -202,6 +202,7 @@ public class Game
             positions[row][col].RegisterHit();
             System.out.println("Hit at (" + row + ", " + col + ")");
             gameFrame.IncrementCounter("Hit");
+            gameFrame.board.getGrid()[row][col].SetMark("Hit", statusDisplay);
             if (positions[row][col].IsSunk()) {
                 System.out.println("Ship sunk!");
                 if (CheckAllShipsSunk()) {
@@ -212,6 +213,7 @@ public class Game
             // Miss
             System.out.println("Miss at (" + row + ", " + col + ")");
             statusDisplay.IncrementCounter("Miss");
+            gameFrame.board.getGrid()[row][col].SetMark("Miss", statusDisplay);
             if (statusDisplay.StrikeCounter >= 3) {
                 DisplayLoss();
             }

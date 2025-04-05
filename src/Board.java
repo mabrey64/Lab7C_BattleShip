@@ -12,10 +12,15 @@ public class Board {
         grid = new GridButton[10][10];
     }
 
+    public GridButton[][] getGrid() {
+        return grid;
+    }
+
     public void DisplayBoard() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                grid[i][j] = new GridButton();
+                grid[i][j] = new GridButton(i, j);
+                grid[i][j].SetMark("", null);
                 int row = i;
                 int col = j;
                 grid[i][j].addActionListener(e -> game.HandleMove(row, col));
